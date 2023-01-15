@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  database:
+    image: postgres:12.1-alpine
+    container_name: simulator_database
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=simulator
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./tmp/data/db:/var/lib/postgresql/data
+  database_test:
+    image: postgres:12.1-alpine
+    container_name: simulator_database_test
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=simulator_test
+    ports:
+      - "5433:5432"

@@ -1,0 +1,7 @@
+POST http://localhost:3000/jogo/simular
+
+###
+GET http://localhost:3000/jogo/player
+
+###
+GET http://localhost:3000/jogo/property

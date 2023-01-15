@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Type {
+  Inpulsivo @map("is:inpulsivo")
+  Exigente @map("is:exigente")
+  Cauteloso @map("is:cauteloso")
+  Aleatorio @map("is:aleatorio")
+  @@map("types")
+}
+
+model Player {
+  id         String   @id @default(uuid())
+  username   String   @unique
+  type       Type
+  balance    Decimal  @db.Decimal(12,2) @default(300.00)
+  created_at DateTime @default(now())
+
+  properties Property[]
+
+  @@map("players")
+}
+
+model Property {
+  id         String   @id @default(uuid())
+  rent_value Decimal  @db.Decimal(5,2)
+  price      Decimal  @db.Decimal(5,2)
+  order      Int      @unique @default(autoincrement())
+  status     String?
+  id_player  String?
+  player     Player?  @relation(fields: [id_player], references: [id])
+  created_at DateTime @default(now())
+
+  @@map("properties")
+}
