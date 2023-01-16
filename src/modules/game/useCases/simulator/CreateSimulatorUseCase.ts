@@ -18,7 +18,7 @@ const PROBABILITY_BUY_PROPERTY = 1;
 
 export class CreateSimulatorUseCase {
   async execute() {
-    const TOTAL_RODADAS = 100;
+    const TOTAL_ROUNDS = 1000;
     const MAX_PROPERTY = 20;
     const FULL_LAP_BONUS = 100;
     let indice = 0;
@@ -39,7 +39,7 @@ export class CreateSimulatorUseCase {
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value);
 
-    while (indice < TOTAL_RODADAS) {
+    while (indice < TOTAL_ROUNDS) {
       if (players.length <= 1) {
         break;
       }
